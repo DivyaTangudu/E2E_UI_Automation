@@ -1,12 +1,10 @@
 import pytest
-import pandas as pd
 from playwright.sync_api import Playwright,expect
 from pages.Registartionpage import RegistrationPage
+from utils.read_exceldata import read_excel_data
 
 # Read Excel and convert to list of dicts
-excel_file = "data/test_data.xlsx"
-df = pd.read_excel(excel_file)
-test_data = df.to_dict("records")
+test_data = read_excel_data("data/test_data.xlsx")
 
 @pytest.mark.parametrize("user_data",test_data)
 def test_registration(playwright:Playwright,browser_context,user_data):
